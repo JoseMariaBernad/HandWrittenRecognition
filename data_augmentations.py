@@ -14,3 +14,10 @@ def invert(image_path):
     except:
         print("Error while augmenting " + str(image_path))
     
+def augment(path, augmentation, is_recursive = True):
+    for file in path.iterdir():
+        if file.is_dir():
+            if is_recursive:
+                augment(file, augmentation)
+        else:
+            augmentation(file)
